@@ -15,6 +15,24 @@ let groupObjectsBy = function (jsonArr, key) {
     return finalObj
 }
 
+console.log(groupObjectsBy([
+    {
+      "channel": "A",
+      "name": "shoe"
+    },
+    {
+      "channel": "A",
+      "name": "electronics"
+}, {
+      "channel": "B",
+      "name": "apparel"
+    },
+    {
+      "channel": "C",
+      "name": "electronics"
+    }
+  ], 'channel'))
+
 // -----  2nd approach using lodash  --------------------------
 // import _ from "loadash";
 

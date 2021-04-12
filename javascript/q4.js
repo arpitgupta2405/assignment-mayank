@@ -1,8 +1,7 @@
-let SortArray = function(originalArray) {
+let SortArray = function(...originalArray) {
     this.originalArray = originalArray
     
-    let arr = originalArray
-    let sortArray = function() {
+    let sortArray = function(arr) {
 
         arr.sort((a,b)=>{
             return a - b
@@ -10,43 +9,39 @@ let SortArray = function(originalArray) {
     }
 
     this.getSortedArray = function() {
-        sortArray()
+        sortArray(this.originalArray)
         return this.originalArray
     }
         
 }
 
-let sortArr = new SortArray([1,5,3,2,33,43,11,22])
-console.log(sortArr)
+let sortArr = new SortArray(1,5,3,2,33,43,11,22)
 
 console.log(sortArr.getSortedArray())
 
 // Implementing inheritance
 
-let SortObjectArray = function(originalArray, key){
+let SortObjectArray = function(key, ...originalArray){
     this.key = key
-    SortArray.call(this, originalArray)
+    SortArray.call(this, ...originalArray)
     
-    let arr = originalArray
-    let ki = key
-    
-    let sortArray = function(){
+    let sortArray = function(arr, key){
 
         arr.sort(function(a, b){
-            return a[ki] - b[ki]
+            return a[key] - b[key]
         })
 
     }
 
     this.getSortedArray = function() {
-        sortArray()
+        sortArray(this.originalArray, this.key)
         return this.originalArray
     }
 }
 
-SortObjectArray.prototype = Object.create(SortArray.prototype)
-
-let objArr = new SortObjectArray([{'abc': 34}, {'abc': 356}, {'abc': 11}], 'abc')
+//SortObjectArray.prototype = Object.create(SortArray.prototype)
+SortObjectArray.prototype = new SortArray()
+let objArr = new SortObjectArray( 'abc', {'abc': 34}, {'abc': 356}, {'abc': 11}, {'abc': 300})
 
 console.log(objArr.getSortedArray())
 
